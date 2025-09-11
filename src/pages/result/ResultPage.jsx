@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ResultPage.module.css";
 import LinearDeterminate from "../../components/LinearDeterminate/LinearDeterminate";
+import { Link } from "react-router-dom";
 
 const ResultPage = ({ tables }) => {
   const [progress, setProgress] = useState({
@@ -138,9 +139,11 @@ const ResultPage = ({ tables }) => {
               <button className={styles.backButton}>
                 <b>Create New Table</b>
               </button>
-              <button className={styles.regenerateButton}>
-                <b>Regenerate</b>
-              </button>
+              <Link to={"/selection"}>
+                <button className={styles.regenerateButton}>
+                  <b>Regenerate</b>
+                </button>
+              </Link>
             </div>
           </div>
         )}
