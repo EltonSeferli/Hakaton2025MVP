@@ -5,6 +5,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import BackButton from "../../components/buttons/backButton/BackButton";
 import Footer from "../../components/footer/Footer";
 
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+
 const TableStructure = ({ tables, setTables }) => {
   const [activeTable, setActiveTable] = useState(null);
   const navigate = useNavigate();
@@ -123,7 +125,7 @@ const TableStructure = ({ tables, setTables }) => {
         {tables.length === 0 ? (
           <div className={styles.emptyState}>
             <div className={styles.emptyIcon}>
-              <img src="src\assets\1994825.png" alt="" />
+              <TableChartRoundedIcon style={{ fontSize: "80px" }} />
             </div>
             <h3>No tables created yet</h3>
             <p>Click "Add Table" to start designing your database schema</p>

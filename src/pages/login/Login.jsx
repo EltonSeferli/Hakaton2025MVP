@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
@@ -99,12 +99,6 @@ export default function LoginPage() {
           aria-hidden="true"
         >
           <div className={styles.panelInner}>
-            <div className={styles.img_div}>
-              <img
-                src="src\assets\NO-code-cover-1-1024x576-1-1-removebg-preview.png"
-                alt=""
-              />
-            </div>
             <span className={styles.panelBody}>
               You are at the right place, to build future with us. You will
               explain, we will build for you.

@@ -52,11 +52,11 @@ const ResultPage = ({ tables }) => {
             <div className={styles.projectLink}>
               <p>Your project is ready: </p>
               <a
-                href="https://your-generated-project.com"
+                href="https://dev-blank.nsp.solutions"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                https://your-generated-project.com
+                https://dev-blank.nsp.solutions
               </a>
             </div>
 
