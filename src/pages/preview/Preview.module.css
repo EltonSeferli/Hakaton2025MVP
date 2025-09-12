@@ -16,6 +16,9 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .container h1 {
@@ -42,6 +45,7 @@
   transition: 0.3s;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  text-align: left;
 }
 .table:hover {
   transform: scale(1.02);
@@ -82,38 +86,18 @@
   background: rgba(255, 255, 255, 0.01);
 }
 
-.actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.backButton {
-  padding: 0.75rem 1.5rem;
-  background: #6c757d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.backButton:hover {
-  background: #5a6268;
-  transform: translateY(-2px);
-}
-
 .generateButton {
-  padding: 0.75rem 1.5rem;
+  width: 80%;
+  padding: 1rem 1.5rem;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: 0.3s;
   background: linear-gradient(to right, #4361ee, #3a0ca3);
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }
 
 .generateButton:hover {

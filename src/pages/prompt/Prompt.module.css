@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   background: radial-gradient(
     circle at center,
     #1c2e4a 0%,
@@ -31,7 +32,7 @@
 }
 
 .container {
-  padding: 60px 40px;
+  padding: 40px;
   width: 100%;
   max-width: 800px;
   min-height: 150px;
@@ -47,6 +48,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
     0 0 0 1px rgba(255, 255, 255, 0.05);
+  margin-top: -100px;
 }
 
 .header {
@@ -55,7 +57,7 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   font-weight: 700;
   margin-bottom: 16px;
   color: white;
@@ -70,27 +72,15 @@
   margin-bottom: 40px;
 }
 
-.link {
-  color: #6ca8ff;
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 500;
-  transition: color 0.2s ease;
-}
-
-.link:hover {
-  color: #8bc1ff;
-}
-
 .inputContainer {
   position: relative;
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 40px;
+  /* margin: 0 auto 40px; */
 }
 
 .textarea {
-  width: 100%;
+  width: 90%;
   min-height: 160px;
   padding: 24px;
   background: rgba(10, 20, 37, 0.7);
@@ -105,6 +95,7 @@
     inset 0 1px 1px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   font-family: inherit;
+  margin-top: -20px;
 }
 
 .textarea:focus {

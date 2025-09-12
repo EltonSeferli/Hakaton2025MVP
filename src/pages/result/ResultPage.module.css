@@ -106,44 +106,11 @@
   color: #2196f3;
   text-decoration: none;
   font-weight: bold;
+  font-size: 28px;
 }
 
 .projectLink a:hover {
   text-decoration: underline;
-}
-
-.tablesPreview {
-  text-align: left;
-  margin-bottom: 2rem;
-}
-
-.tablesPreview h3 {
-  color: rgba(255, 255, 255, 0.4);
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 0.5rem;
-}
-
-.tablePreview {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  /* background: white; */
-  color: white;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.tablePreview h4 {
-  margin: 0 0 0.5rem 0;
-}
-
-.tablePreview ul {
-  margin: 0;
-  padding-left: 1.5rem;
-}
-
-.tablePreview li {
-  margin-bottom: 0.25rem;
 }
 
 .finalActions {

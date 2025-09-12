@@ -70,6 +70,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card::after {
@@ -107,7 +108,7 @@
 
 .cardTitle {
   margin-bottom: 16px;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
   letter-spacing: 1px;
 }
@@ -116,9 +117,10 @@
   flex-grow: 1;
   margin-bottom: 32px;
   line-height: 1.6;
-  font-size: 16px;
+  font-size: 23px;
   opacity: 0.9;
   max-width: 300px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .startBtn {
@@ -224,4 +226,8 @@
   .cardTitle {
     font-size: 24px;
   }
+}
+.footer {
+  color: white;
+  margin-top: 50px;
 }

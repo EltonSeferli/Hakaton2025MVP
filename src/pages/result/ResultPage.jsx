@@ -2,49 +2,74 @@ import React, { useState, useEffect } from "react";
 import styles from "./ResultPage.module.css";
 import LinearDeterminate from "../../components/LinearDeterminate/LinearDeterminate";
 import { Link } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 const ResultPage = ({ tables }) => {
   const [progress, setProgress] = useState({
     backend: false,
-    frontend: false,
-    mobile: false,
     web: false,
+    mobile: false,
+    desktop: false,
+    deploy: false,
   });
 
   useEffect(() => {
-    // Backend generating
     const backendTimer = setTimeout(() => {
       setProgress((prev) => ({ ...prev, backend: true }));
-    }, 2000);
+    }, 1500);
 
-    // Frontend generating
-    const frontendTimer = setTimeout(() => {
-      setProgress((prev) => ({ ...prev, frontend: true }));
-    }, 4000);
-
-    // Mobile app generating
-    const mobileTimer = setTimeout(() => {
-      setProgress((prev) => ({ ...prev, mobile: true }));
-    }, 6000);
-
-    // Web app generating
     const webTimer = setTimeout(() => {
       setProgress((prev) => ({ ...prev, web: true }));
-    }, 8000);
+    }, 3000);
 
+    const mobileTimer = setTimeout(() => {
+      setProgress((prev) => ({ ...prev, mobile: true }));
+    }, 4500);
+
+    const desktopTimer = setTimeout(() => {
+      setProgress((prev) => ({ ...prev, desktop: true }));
+    }, 6000);
+    const deployinTimer = setTimeout(() => {
+      setProgress((prev) => ({ ...prev, deploy: true }));
+    }, 7500);
     return () => {
       clearTimeout(backendTimer);
-      clearTimeout(frontendTimer);
-      clearTimeout(mobileTimer);
       clearTimeout(webTimer);
+      clearTimeout(mobileTimer);
+      clearTimeout(desktopTimer);
+      clearTimeout(deployinTimer);
     };
   }, []);
 
   return (
     <div className={styles.screen}>
+      <Footer />
       <div className={styles.container}>
         <h1>Generation Process</h1>
+        {progress.deploy && (
+          <div className={styles.results}>
+            <h2>Generated Project</h2>
+            <div className={styles.projectLink}>
+              <p>Your project is ready: </p>
+              <a
+                href="https://your-generated-project.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                https://your-generated-project.com
+              </a>
+            </div>
 
+            <div className={styles.finalActions}>
+              <Link to={"/selection"}>
+                <button className={styles.regenerateButton}>
+                  <b>Regenerate</b>
+                </button>
+              </Link>
+            </div>
+          </div>
+        )}
+        <br />
         <div className={styles.progressContainer}>
           <div className={styles.progressItem}>
             <div
@@ -57,21 +82,20 @@ const ResultPage = ({ tables }) => {
             <div className={styles.progressText}>
               <h3>Backend Generating</h3>
               <p>{progress.backend ? "Generated" : "Generating..."}</p>
-              {/* <LinearDeterminate /> */}
             </div>
           </div>
 
           <div className={styles.progressItem}>
             <div
               className={`${styles.progressIcon} ${
-                progress.frontend ? styles.completed : styles.pending
+                progress.web ? styles.completed : styles.pending
               }`}
             >
-              {progress.frontend ? "✓" : "..."}
+              {progress.web ? "✓" : "..."}
             </div>
             <div className={styles.progressText}>
-              <h3>Frontend Generating</h3>
-              <p>{progress.frontend ? "Generated" : "Generating..."}</p>
+              <h3>Web App Generating</h3>
+              <p>{progress.web ? "Generated" : "Generating..."}</p>
             </div>
           </div>
 
@@ -92,61 +116,30 @@ const ResultPage = ({ tables }) => {
           <div className={styles.progressItem}>
             <div
               className={`${styles.progressIcon} ${
-                progress.web ? styles.completed : styles.pending
+                progress.desktop ? styles.completed : styles.pending
               }`}
             >
-              {progress.web ? "✓" : "..."}
+              {progress.desktop ? "✓" : "..."}
             </div>
             <div className={styles.progressText}>
-              <h3>Web App Generating</h3>
-              <p>{progress.web ? "Generated" : "Generating..."}</p>
+              <h3>Desktop App Generating</h3>
+              <p>{progress.desktop ? "Generated" : "Generating..."}</p>
+            </div>
+          </div>
+          <div className={styles.progressItem}>
+            <div
+              className={`${styles.progressIcon} ${
+                progress.deploy ? styles.completed : styles.pending
+              }`}
+            >
+              {progress.deploy ? "✓" : "..."}
+            </div>
+            <div className={styles.progressText}>
+              <h3>Deploying to Server Completing</h3>
+              <p>{progress.deploy ? "Completed" : "Completing..."}</p>
             </div>
           </div>
         </div>
-
-        {progress.web && (
-          <div className={styles.results}>
-            <h2>Generated Project</h2>
-            <div className={styles.projectLink}>
-              <p>Your project is ready: </p>
-              <a
-                href="https://your-generated-project.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://your-generated-project.com
-              </a>
-            </div>
-
-            <div className={styles.tablesPreview}>
-              <h3>Generated Tables:</h3>
-              {tables?.map((table) => (
-                <div key={table.id} className={styles.tablePreview}>
-                  <h4>{table.tableName}</h4>
-                  <ul>
-                    {table.rows.map((row) => (
-                      <li key={row.id}>
-                        {row.field} ({row.type}) {row.required && " *"}{" "}
-                        {row.unique && " [UNIQUE]"}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div className={styles.finalActions}>
-              <button className={styles.backButton}>
-                <b>Create New Table</b>
-              </button>
-              <Link to={"/selection"}>
-                <button className={styles.regenerateButton}>
-                  <b>Regenerate</b>
-                </button>
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

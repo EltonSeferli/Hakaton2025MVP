@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import styles from "./Prompt.module.css";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
+import BackButton from "../../components/buttons/backButton/BackButton";
+import Footer from "../../components/footer/Footer";
 
 export default function Prompt({ tables, setTables }) {
   const tables1 = [
@@ -63,13 +65,13 @@ export default function Prompt({ tables, setTables }) {
 
   return (
     <div className={styles.screen}>
+      <BackButton />
+      <Footer />
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={styles.title}>What can we help you build?</h1>
+          <h1 className={styles.title}>Just type you need</h1>
           <p className={styles.subtitle}>
-            Describe your idea and let AI build it for you in minutes. <br />
-            Use our <span className={styles.link}>prompt guide</span> to get
-            better results.
+            AI will build data structure for you
           </p>
         </div>
 
@@ -92,51 +94,61 @@ export default function Prompt({ tables, setTables }) {
             className={styles.categoryBtn}
             onClick={() =>
               setText(
-                "An online store where users can browse and purchase products securely."
+                "I want to create a table structure to manage company assets. Each asset should have a name, category, purchase date, value, and current status. I also want to keep track of maintenance history for every asset."
               )
             }
           >
-            E-commerce
+            Assets App
           </button>
           <button
             className={styles.categoryBtn}
             onClick={() =>
               setText(
-                "A platform where users can share posts, follow others, and interact in real time."
+                "Build a table structure for managing stock in a store. I need products with name, SKU, quantity, supplier, unit price, and last updated date. Also add a table for stock transactions like incoming and outgoing items."
               )
             }
           >
-            Social Media
+            Stock App
           </button>
           <button
             className={styles.categoryBtn}
             onClick={() =>
               setText(
-                "A website for writers to publish articles, add tags, and allow comments."
+                "Give me a table structure for a document management system where I can upload files. Each document should have a title, description, file path, uploaded by user, upload date, and version number. I also want to organize them by categories."
               )
             }
           >
-            Blog Platform
+            Document Managemant System
           </button>
           <button
             className={styles.categoryBtn}
             onClick={() =>
               setText(
-                "An app for managing tasks, setting deadlines, and tracking progress."
+                "I need a table structure for a university system. It should have students with personal info, courses, professors, and enrollment tables. I also need to store grades, class schedules, and departments"
               )
             }
           >
-            Task Manager
+            University Managemant System
           </button>
           <button
             className={styles.categoryBtn}
             onClick={() =>
               setText(
-                "A fitness tracking app to log workouts, track calories, and set goals."
+                "Create a table structure for a restaurant management app. I need tables for menus, menu items, customers, staff, reservations, and orders. Each order should link to customers and menu items."
               )
             }
           >
-            Fitness App
+            Restaurant Managemant System
+          </button>
+          <button
+            className={styles.categoryBtn}
+            onClick={() =>
+              setText(
+                "I want a table structure for HR management. It should include employees, departments, positions, payroll, attendance, and leave requests. Also keep records of performance reviews and hiring dates."
+              )
+            }
+          >
+            HR Managemant System
           </button>
         </div>
       </div>

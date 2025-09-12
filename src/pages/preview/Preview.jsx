@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import styles from "./Preview.module.css";
 import { Link, useNavigate } from "react-router-dom";
+import BackButton from "../../components/buttons/backButton/BackButton";
+import Footer from "../../components/footer/Footer";
 
 const Preview = ({ tables }) => {
   const navigate = useNavigate();
   return (
     <div className={styles.screen}>
+      <BackButton />
+      <Footer />
       <div className={styles.container}>
         <h1>Generated Tables</h1>
         <p>
           Below are the table structures you created. Click the button below to
           generate.
         </p>
-
+        <Link to={"/result"}>
+          <button className={styles.generateButton}>
+            <b>Generate</b>
+          </button>
+        </Link>
         <div className={styles.tablesContainer}>
           {tables?.map((table) => (
             <div key={table.id} className={styles.table}>
@@ -43,17 +51,6 @@ const Preview = ({ tables }) => {
               </table>
             </div>
           ))}
-        </div>
-
-        <div className={styles.actions}>
-          <button className={styles.backButton} onClick={() => navigate(-1)}>
-            <b>Back</b>
-          </button>
-          <Link to={"/result"}>
-            <button className={styles.generateButton}>
-              <b>Generate</b>
-            </button>
-          </Link>
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./TableStructure.module.css";
 import { useNavigate } from "react-router-dom";
+import EditIcon from "@mui/icons-material/Edit";
+import BackButton from "../../components/buttons/backButton/BackButton";
+import Footer from "../../components/footer/Footer";
 
 const TableStructure = ({ tables, setTables }) => {
   const [activeTable, setActiveTable] = useState(null);
@@ -100,6 +103,8 @@ const TableStructure = ({ tables, setTables }) => {
 
   return (
     <div className={styles.screen}>
+      <BackButton />
+      <Footer />
       <div className={styles.container}>
         <div className={styles.header}>
           <h2 className={styles.title}>Database Schema Builder</h2>
@@ -117,7 +122,9 @@ const TableStructure = ({ tables, setTables }) => {
 
         {tables.length === 0 ? (
           <div className={styles.emptyState}>
-            <div className={styles.emptyIcon}>📊</div>
+            <div className={styles.emptyIcon}>
+              <img src="src\assets\1994825.png" alt="" />
+            </div>
             <h3>No tables created yet</h3>
             <p>Click "Add Table" to start designing your database schema</p>
           </div>
@@ -147,6 +154,10 @@ const TableStructure = ({ tables, setTables }) => {
                         updateTableName(table.id, e.target.value)
                       }
                     />
+                    <button className={styles.editTableNameButton}>
+                      {" "}
+                      <EditIcon />
+                    </button>
                   </div>
                   <div className={styles.tableActions}>
                     <button
@@ -164,120 +175,139 @@ const TableStructure = ({ tables, setTables }) => {
                 {activeTable === table.id && (
                   <>
                     <div className={styles.tableContent}>
-                      <div className={styles.rowsHeader}>
-                        <span>Field Name</span>
-                        <span>Data Type</span>
-                        <span>Size</span>
-                        <span>Required</span>
-                        <span>Unique</span>
-                        <span>Default Value</span>
-                        <span>Actions</span>
-                      </div>
+                      <table className={styles.dataTable}>
+                        <thead>
+                          <tr>
+                            <th>Field Name</th>
+                            <th>Data Type</th>
+                            <th>Size</th>
+                            <th>Required</th>
+                            <th>Unique</th>
+                            <th>Default Value</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {table.rows.map((row) => (
+                            <tr key={row.id}>
+                              <td>
+                                <input
+                                  type="text"
+                                  placeholder="Field name"
+                                  value={row.field}
+                                  onChange={(e) =>
+                                    updateRow(
+                                      table.id,
+                                      row.id,
+                                      "field",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              </td>
 
-                      {table.rows.map((row) => (
-                        <div className={styles.row} key={row.id}>
-                          <input
-                            type="text"
-                            placeholder="Field name"
-                            value={row.field}
-                            onChange={(e) =>
-                              updateRow(
-                                table.id,
-                                row.id,
-                                "field",
-                                e.target.value
-                              )
-                            }
-                          />
+                              <td>
+                                <select
+                                  value={row.type}
+                                  onChange={(e) =>
+                                    updateRow(
+                                      table.id,
+                                      row.id,
+                                      "type",
+                                      e.target.value
+                                    )
+                                  }
+                                >
+                                  <option value="String">String</option>
+                                  <option value="Integer">Integer</option>
+                                  <option value="Double">Double</option>
+                                  <option value="Boolean">Boolean</option>
+                                  <option value="Date">Date</option>
+                                  <option value="Text">Text</option>
+                                  <option value="UUID">UUID</option>
+                                </select>
+                              </td>
 
-                          <select
-                            value={row.type}
-                            onChange={(e) =>
-                              updateRow(
-                                table.id,
-                                row.id,
-                                "type",
-                                e.target.value
-                              )
-                            }
-                          >
-                            <option value="String">String</option>
-                            <option value="Integer">Integer</option>
-                            <option value="Double">Double</option>
-                            <option value="Boolean">Boolean</option>
-                            <option value="Date">Date</option>
-                            <option value="Text">Text</option>
-                            <option value="UUID">UUID</option>
-                          </select>
+                              <td>
+                                <input
+                                  type="text"
+                                  placeholder="Size"
+                                  value={row.size}
+                                  onChange={(e) =>
+                                    updateRow(
+                                      table.id,
+                                      row.id,
+                                      "size",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              </td>
 
-                          <input
-                            type="text"
-                            placeholder="Size"
-                            value={row.size}
-                            onChange={(e) =>
-                              updateRow(
-                                table.id,
-                                row.id,
-                                "size",
-                                e.target.value
-                              )
-                            }
-                          />
+                              <td>
+                                <label className={styles.checkboxContainer}>
+                                  <input
+                                    type="checkbox"
+                                    checked={row.required}
+                                    onChange={(e) =>
+                                      updateRow(
+                                        table.id,
+                                        row.id,
+                                        "required",
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                  <span className={styles.checkmark}></span>
+                                </label>
+                              </td>
 
-                          <label className={styles.checkboxContainer}>
-                            <input
-                              type="checkbox"
-                              checked={row.required}
-                              onChange={(e) =>
-                                updateRow(
-                                  table.id,
-                                  row.id,
-                                  "required",
-                                  e.target.checked
-                                )
-                              }
-                            />
-                            <span className={styles.checkmark}></span>
-                          </label>
+                              <td>
+                                <label className={styles.checkboxContainer}>
+                                  <input
+                                    type="checkbox"
+                                    checked={row.unique}
+                                    onChange={(e) =>
+                                      updateRow(
+                                        table.id,
+                                        row.id,
+                                        "unique",
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                  <span className={styles.checkmark}></span>
+                                </label>
+                              </td>
 
-                          <label className={styles.checkboxContainer}>
-                            <input
-                              type="checkbox"
-                              checked={row.unique}
-                              onChange={(e) =>
-                                updateRow(
-                                  table.id,
-                                  row.id,
-                                  "unique",
-                                  e.target.checked
-                                )
-                              }
-                            />
-                            <span className={styles.checkmark}></span>
-                          </label>
+                              <td>
+                                <input
+                                  type="text"
+                                  placeholder="Default value"
+                                  value={row.default}
+                                  onChange={(e) =>
+                                    updateRow(
+                                      table.id,
+                                      row.id,
+                                      "default",
+                                      e.target.value
+                                    )
+                                  }
+                                />
+                              </td>
 
-                          <input
-                            type="text"
-                            placeholder="Default value"
-                            value={row.default}
-                            onChange={(e) =>
-                              updateRow(
-                                table.id,
-                                row.id,
-                                "default",
-                                e.target.value
-                              )
-                            }
-                          />
-
-                          <button
-                            className={styles.removeRowButton}
-                            onClick={() => removeRow(table.id, row.id)}
-                          >
-                            ×
-                          </button>
-                        </div>
-                      ))}
+                              <td>
+                                <button
+                                  className={styles.removeRowButton}
+                                  onClick={() => removeRow(table.id, row.id)}
+                                >
+                                  ×
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
 
                     <button

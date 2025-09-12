@@ -7,6 +7,10 @@ export default function LoginPage() {
   const navigate = useNavigate();
   return (
     <div className={styles.screen}>
+      <div className={styles.heading_title}>
+        <h1>Welcome</h1>
+        <p>AI powered nocodeEngine Platform</p>
+      </div>
       <div className={styles.card}>
         <div className={styles.forms}>
           <div className={styles.formCol}>
@@ -37,20 +41,38 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Right — Sign Up */}
           <div className={styles.formCol}>
             <h2 className={styles.heading}>Sign up</h2>
+            <div style={{ display: "flex", gap: "10px" }}>
+              {" "}
+              <input className={styles.input} type="text" placeholder="Name" />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder="Surname"
+              />
+            </div>
+
+            <input className={styles.input} type="email" placeholder="Email" />
+            <div style={{ display: "flex", gap: "10px" }}>
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Password"
+              />
+              <input
+                className={styles.input}
+                type="password"
+                placeholder="Confirm password"
+              />
+            </div>
+
             <input
               className={styles.input}
               type="text"
-              placeholder="Your name"
+              placeholder="Company name"
             />
-            <input className={styles.input} type="email" placeholder="Email" />
-            <input
-              className={styles.input}
-              type="password"
-              placeholder="Password"
-            />
+
             <button
               className={styles.primary}
               onClick={() => navigate("/selection")}
@@ -70,7 +92,6 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Animated navy panel on top */}
         <div
           className={`${styles.panel} ${
             isSignUp ? styles.panelLeft : styles.panelRight
@@ -78,13 +99,16 @@ export default function LoginPage() {
           aria-hidden="true"
         >
           <div className={styles.panelInner}>
-            <h3 className={styles.panelTitle}>
-              {isSignUp ? "Welcome!" : "Hi, user"}
-            </h3>
-            <p className={styles.panelBody}>
-              Here are some texts that explain your app. This panel is the only
-              thing that animates.
-            </p>
+            <div className={styles.img_div}>
+              <img
+                src="src\assets\NO-code-cover-1-1024x576-1-1-removebg-preview.png"
+                alt=""
+              />
+            </div>
+            <span className={styles.panelBody}>
+              You are at the right place, to build future with us. You will
+              explain, we will build for you.
+            </span>
           </div>
         </div>
       </div>
