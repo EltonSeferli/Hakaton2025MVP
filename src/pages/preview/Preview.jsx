@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Preview.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import BackButton from "../../components/buttons/backButton/BackButton";
 import Footer from "../../components/footer/Footer";
+import lang from "./lang";
+import LangToggle from "../../components/langToggle/LangToggle";
 
-const Preview = ({ tables }) => {
+const Preview = ({ tables, language = "en", setLanguage }) => {
   const navigate = useNavigate();
+  const t = lang[language]; // seçilmiş dil
+
   return (
     <div className={styles.screen}>
-      <BackButton />
+      <LangToggle setLanguage={setLanguage} />
+      <BackButton language={language} />
       <Footer />
       <div className={styles.container}>
-        <h1>Generated Tables</h1>
-        <p>
-          Below are the table structures you created. Click the button below to
-          generate.
-        </p>
+        <h1>{t.previewTitle}</h1>
+        <p>{t.previewSubtitle}</p>
+
         <Link to={"/result"}>
           <button className={styles.generateButton}>
-            <b>Generate</b>
+            <b>{t.generateButton}</b>
           </button>
         </Link>
+
         <div className={styles.tablesContainer}>
           {tables?.map((table) => (
             <div key={table.id} className={styles.table}>
@@ -28,12 +32,12 @@ const Preview = ({ tables }) => {
               <table className={styles.tableStructure}>
                 <thead>
                   <tr>
-                    <th>Field</th>
-                    <th>Type</th>
-                    <th>Size</th>
-                    <th>Required</th>
-                    <th>Unique</th>
-                    <th>Default</th>
+                    <th>{t.field}</th>
+                    <th>{t.type}</th>
+                    <th>{t.size}</th>
+                    <th>{t.required}</th>
+                    <th>{t.unique}</th>
+                    <th>{t.default}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -42,8 +46,8 @@ const Preview = ({ tables }) => {
                       <td>{row.field}</td>
                       <td>{row.type}</td>
                       <td>{row.size}</td>
-                      <td>{row.required ? "✓" : "✗"}</td>
-                      <td>{row.unique ? "✓" : "✗"}</td>
+                      <td>{row.required ? t.yes : t.no}</td>
+                      <td>{row.unique ? t.yes : t.no}</td>
                       <td>{row.default}</td>
                     </tr>
                   ))}

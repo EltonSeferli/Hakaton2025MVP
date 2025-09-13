@@ -1,97 +1,117 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
+import lang from "./lang";
+import LangToggle from "../../components/langToggle/LangToggle";
 
-export default function LoginPage() {
+export default function LoginPage({ language, setLanguage }) {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
+
+  const t = lang[language];
+
   return (
     <div className={styles.screen}>
+      <LangToggle setLanguage={setLanguage} />
+
       <div className={styles.heading_title}>
-        <h1>Welcome</h1>
-        <p>AI powered nocodeEngine Platform</p>
+        <h1>{t.welcome}</h1>
+        <p>{t.subtitle}</p>
       </div>
+
       <div className={styles.card}>
         <div className={styles.forms}>
+          {/* LOGIN */}
           <div className={styles.formCol}>
-            <h2 className={styles.heading}>Log in</h2>
-            <input className={styles.input} type="email" placeholder="Email" />
+            <h2 className={styles.heading}>{t.loginTitle}</h2>
+            <input
+              className={styles.input}
+              type="email"
+              placeholder={t.email}
+            />
             <input
               className={styles.input}
               type="password"
-              placeholder="Password"
+              placeholder={t.password}
             />
             <button
               className={styles.primary}
-              onClick={() => {
-                navigate("/selection");
-              }}
+              onClick={() => navigate("/selection")}
             >
-              Log in
+              {t.loginBtn}
             </button>
             <p className={styles.small}>
-              Don’t have an account?{" "}
+              {t.dontHaveAccount}{" "}
               <button
                 className={styles.link}
                 type="button"
                 onClick={() => setIsSignUp(true)}
               >
-                Sign up
+                {t.signUp}
               </button>
             </p>
           </div>
 
+          {/* SIGN UP */}
           <div className={styles.formCol}>
-            <h2 className={styles.heading}>Sign up</h2>
+            <h2 className={styles.heading}>{t.signUpTitle}</h2>
             <div style={{ display: "flex", gap: "10px" }}>
-              {" "}
-              <input className={styles.input} type="text" placeholder="Name" />
               <input
                 className={styles.input}
                 type="text"
-                placeholder="Surname"
+                placeholder={t.name}
+              />
+              <input
+                className={styles.input}
+                type="text"
+                placeholder={t.surname}
               />
             </div>
 
-            <input className={styles.input} type="email" placeholder="Email" />
+            <input
+              className={styles.input}
+              type="email"
+              placeholder={t.email}
+            />
             <div style={{ display: "flex", gap: "10px" }}>
               <input
                 className={styles.input}
                 type="password"
-                placeholder="Password"
+                placeholder={t.password}
               />
               <input
                 className={styles.input}
                 type="password"
-                placeholder="Confirm password"
+                placeholder={t.confirmPassword}
               />
             </div>
 
             <input
               className={styles.input}
               type="text"
-              placeholder="Company name"
+              placeholder={t.company}
             />
 
             <button
               className={styles.primary}
               onClick={() => navigate("/selection")}
             >
-              Sign up
+              {t.signUpBtn}
             </button>
             <p className={styles.small}>
-              Already have an account?{" "}
+              {t.alreadyHaveAccount}{" "}
               <button
                 className={styles.link}
                 type="button"
                 onClick={() => setIsSignUp(false)}
               >
-                Log in
+                {t.loginTitle}
               </button>
             </p>
           </div>
         </div>
 
+        {/* PANEL */}
         <div
           className={`${styles.panel} ${
             isSignUp ? styles.panelLeft : styles.panelRight
@@ -99,10 +119,7 @@ export default function LoginPage() {
           aria-hidden="true"
         >
           <div className={styles.panelInner}>
-            <span className={styles.panelBody}>
-              You are at the right place, to build future with us. You will
-              explain, we will build for you.
-            </span>
+            <span className={styles.panelBody}>{t.panelText}</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,14 @@
 .footer {
   color: white;
   position: fixed;
-  bottom: 30px;
-  right: 20px;
+  bottom: 20px;
+  right: 30px;
+  display: flex;
+  gap: 10px;
+}
+.footer h2 {
+  font-size: 30px;
+}
+.footer img {
+  width: 50px;
 }

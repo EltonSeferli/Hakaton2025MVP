@@ -1,0 +1,14 @@
+.select {
+  padding: 10px;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  outline: none;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: white;
+}
+.select option {
+  color: black;
+}

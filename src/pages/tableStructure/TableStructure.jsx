@@ -1,15 +1,22 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styles from "./TableStructure.module.css";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import BackButton from "../../components/buttons/backButton/BackButton";
 import Footer from "../../components/footer/Footer";
-
 import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+import lang from "./lang";
+import LangToggle from "../../components/langToggle/LangToggle";
 
-const TableStructure = ({ tables, setTables }) => {
+const TableStructure = ({
+  tables,
+  setTables,
+  language = "en",
+  setLanguage,
+}) => {
   const [activeTable, setActiveTable] = useState(null);
   const navigate = useNavigate();
+  const t = lang[language];
 
   const addTable = () => {
     const newTable = {
@@ -105,20 +112,18 @@ const TableStructure = ({ tables, setTables }) => {
 
   return (
     <div className={styles.screen}>
-      <BackButton />
+      <LangToggle setLanguage={setLanguage} />
+      <BackButton language={language} />
       <Footer />
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Database Schema Builder</h2>
-          <p className={styles.subtitle}>
-            Design your database tables with a structured approach. Define table
-            names, fields, data types, and constraints for your application.
-          </p>
+          <h2 className={styles.title}>{t.tableStructureTitle}</h2>
+          <p className={styles.subtitle}>{t.tableStructureSubtitle}</p>
         </div>
 
         <div className={styles.actions}>
           <button className={styles.primaryButton} onClick={addTable}>
-            + Add Table
+            {t.addTable}
           </button>
         </div>
 
@@ -127,8 +132,8 @@ const TableStructure = ({ tables, setTables }) => {
             <div className={styles.emptyIcon}>
               <TableChartRoundedIcon style={{ fontSize: "80px" }} />
             </div>
-            <h3>No tables created yet</h3>
-            <p>Click "Add Table" to start designing your database schema</p>
+            <h3>{t.noTablesTitle}</h3>
+            <p>{t.noTablesDesc}</p>
           </div>
         ) : (
           <div className={styles.tablesContainer}>
@@ -148,7 +153,7 @@ const TableStructure = ({ tables, setTables }) => {
                     <input
                       className={styles.tableName}
                       type="text"
-                      placeholder="Table Name"
+                      placeholder={t.tableNamePlaceholder}
                       value={table.tableName}
                       onClick={(e) => e.stopPropagation()}
                       required
@@ -157,7 +162,6 @@ const TableStructure = ({ tables, setTables }) => {
                       }
                     />
                     <button className={styles.editTableNameButton}>
-                      {" "}
                       <EditIcon />
                     </button>
                   </div>
@@ -180,13 +184,13 @@ const TableStructure = ({ tables, setTables }) => {
                       <table className={styles.dataTable}>
                         <thead>
                           <tr>
-                            <th>Field Name</th>
-                            <th>Data Type</th>
-                            <th>Size</th>
-                            <th>Required</th>
-                            <th>Unique</th>
-                            <th>Default Value</th>
-                            <th>Actions</th>
+                            <th>{t.fieldName}</th>
+                            <th>{t.dataType}</th>
+                            <th>{t.size}</th>
+                            <th>{t.required}</th>
+                            <th>{t.unique}</th>
+                            <th>{t.defaultValue}</th>
+                            <th>{t.actions}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -195,7 +199,7 @@ const TableStructure = ({ tables, setTables }) => {
                               <td>
                                 <input
                                   type="text"
-                                  placeholder="Field name"
+                                  placeholder={t.fieldNamePlaceholder}
                                   value={row.field}
                                   onChange={(e) =>
                                     updateRow(
@@ -220,20 +224,24 @@ const TableStructure = ({ tables, setTables }) => {
                                     )
                                   }
                                 >
-                                  <option value="String">String</option>
-                                  <option value="Integer">Integer</option>
-                                  <option value="Double">Double</option>
-                                  <option value="Boolean">Boolean</option>
-                                  <option value="Date">Date</option>
-                                  <option value="Text">Text</option>
-                                  <option value="UUID">UUID</option>
+                                  <option value="String">{t.typeString}</option>
+                                  <option value="Integer">
+                                    {t.typeInteger}
+                                  </option>
+                                  <option value="Double">{t.typeDouble}</option>
+                                  <option value="Boolean">
+                                    {t.typeBoolean}
+                                  </option>
+                                  <option value="Date">{t.typeDate}</option>
+                                  <option value="Text">{t.typeText}</option>
+                                  <option value="UUID">{t.typeUUID}</option>
                                 </select>
                               </td>
 
                               <td>
                                 <input
                                   type="text"
-                                  placeholder="Size"
+                                  placeholder={t.sizePlaceholder}
                                   value={row.size}
                                   onChange={(e) =>
                                     updateRow(
@@ -285,7 +293,7 @@ const TableStructure = ({ tables, setTables }) => {
                               <td>
                                 <input
                                   type="text"
-                                  placeholder="Default value"
+                                  placeholder={t.defaultValuePlaceholder}
                                   value={row.default}
                                   onChange={(e) =>
                                     updateRow(
@@ -316,7 +324,7 @@ const TableStructure = ({ tables, setTables }) => {
                       className={styles.addRowButton}
                       onClick={() => addRow(table.id)}
                     >
-                      + Add Field
+                      {t.addField}
                     </button>
                   </>
                 )}
@@ -324,6 +332,7 @@ const TableStructure = ({ tables, setTables }) => {
             ))}
           </div>
         )}
+
         {tables.length > 0 ? (
           <button
             style={{ marginTop: "100px" }}
@@ -332,7 +341,7 @@ const TableStructure = ({ tables, setTables }) => {
               navigate("/preview");
             }}
           >
-            Preview
+            {t.preview}
           </button>
         ) : null}
       </div>

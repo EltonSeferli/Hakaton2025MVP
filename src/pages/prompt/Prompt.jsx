@@ -4,8 +4,12 @@ import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { Link } from "react-router-dom";
 import BackButton from "../../components/buttons/backButton/BackButton";
 import Footer from "../../components/footer/Footer";
+import lang from "./lang"; // import translations
+import LangToggle from "../../components/langToggle/LangToggle";
 
-export default function Prompt({ tables, setTables }) {
+export default function Prompt({ tables, setTables, language, setLanguage }) {
+  const t = lang[language];
+
   const tables1 = [
     {
       id: Date.now(),
@@ -65,14 +69,14 @@ export default function Prompt({ tables, setTables }) {
 
   return (
     <div className={styles.screen}>
-      <BackButton />
+      <LangToggle setLanguage={setLanguage} />
+
+      <BackButton language={language} />
       <Footer />
       <div className={styles.container}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Just type you need</h1>
-          <p className={styles.subtitle}>
-            AI will build data structure for you
-          </p>
+          <h1 className={styles.title}>{t.promptTitle}</h1>
+          <p className={styles.subtitle}>{t.promptSubtitle}</p>
         </div>
 
         <div className={styles.inputContainer}>
@@ -80,7 +84,7 @@ export default function Prompt({ tables, setTables }) {
             className={styles.textarea}
             onChange={(e) => setText(e.target.value)}
             value={text}
-            placeholder="A discovery app for food lovers to find nearby restaurants and read reviews."
+            placeholder={t.promptPlaceholder}
           />
           <Link to={"/preview"}>
             <button className={styles.sendButton} disabled={text.length === 0}>
@@ -92,63 +96,39 @@ export default function Prompt({ tables, setTables }) {
         <div className={styles.categories}>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "I want to create a table structure to manage company assets. Each asset should have a name, category, purchase date, value, and current status. I also want to keep track of maintenance history for every asset."
-              )
-            }
+            onClick={() => setText(t.assetsAppPrompt)}
           >
-            Assets App
+            {t.assetsApp}
           </button>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "Build a table structure for managing stock in a store. I need products with name, SKU, quantity, supplier, unit price, and last updated date. Also add a table for stock transactions like incoming and outgoing items."
-              )
-            }
+            onClick={() => setText(t.stockAppPrompt)}
           >
-            Stock App
+            {t.stockApp}
           </button>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "Give me a table structure for a document management system where I can upload files. Each document should have a title, description, file path, uploaded by user, upload date, and version number. I also want to organize them by categories."
-              )
-            }
+            onClick={() => setText(t.docAppPrompt)}
           >
-            Document Managemant System
+            {t.docApp}
           </button>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "I need a table structure for a university system. It should have students with personal info, courses, professors, and enrollment tables. I also need to store grades, class schedules, and departments"
-              )
-            }
+            onClick={() => setText(t.universityAppPrompt)}
           >
-            University Managemant System
+            {t.universityApp}
           </button>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "Create a table structure for a restaurant management app. I need tables for menus, menu items, customers, staff, reservations, and orders. Each order should link to customers and menu items."
-              )
-            }
+            onClick={() => setText(t.restaurantAppPrompt)}
           >
-            Restaurant Managemant System
+            {t.restaurantApp}
           </button>
           <button
             className={styles.categoryBtn}
-            onClick={() =>
-              setText(
-                "I want a table structure for HR management. It should include employees, departments, positions, payroll, attendance, and leave requests. Also keep records of performance reviews and hiring dates."
-              )
-            }
+            onClick={() => setText(t.hrAppPrompt)}
           >
-            HR Managemant System
+            {t.hrApp}
           </button>
         </div>
       </div>
