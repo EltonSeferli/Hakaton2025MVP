@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
+
 export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
