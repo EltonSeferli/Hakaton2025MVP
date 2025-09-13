@@ -59,11 +59,11 @@ const ResultPage = ({ tables, language = "en", setLanguage }) => {
             <div className={styles.projectLink}>
               <p>{t.projectReady} </p>
               <a
-                href="https://dev-blank.nsp.solutions"
+                href="https://demo-example-smoky.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                https://dev-blank.nsp.solutions
+                https://demo-example-smoky.vercel.app/
               </a>
             </div>
 
