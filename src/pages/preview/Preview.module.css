@@ -1,5 +1,5 @@
 .screen {
-  min-height: 100vh;
+  min-height: 100dvh; /* mobile-friendly */
   display: flex;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   padding: 20px 0;
@@ -9,98 +9,186 @@
     #244069 40%,
     #0d1a30 100%
   );
-  color: white;
+  color: #fff;
 }
 
 .container {
-  padding: 2rem;
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: clamp(1rem, 2vw, 2rem);
   display: flex;
   flex-direction: column;
   text-align: center;
+  gap: 0.5rem;
 }
 
 .container h1 {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2.25rem);
+  line-height: 1.2;
 }
 
 .container p {
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0 auto 1.5rem;
+  max-width: 68ch;
+  font-size: clamp(0.95rem, 0.5vw + 0.85rem, 1.1rem);
+  color: #cfd6de;
 }
 
 .tablesContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: clamp(1rem, 1.5vw, 2rem);
+  margin-bottom: clamp(1rem, 2vw, 2rem);
 }
 
+/* each table card */
 .table {
-  /* border: 1px solid #ddd; */
-  border-radius: 8px;
-  overflow: hidden;
-  transition: 0.3s;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  border-radius: 12px;
+  overflow: hidden; /* keeps rounded corners */
+  overflow-x: auto; /* enables horizontal scroll on small screens */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: rgba(50, 50, 93, 0.25) 0 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0 8px 16px -8px;
   text-align: left;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  -webkit-overflow-scrolling: touch; /* smoother iOS scrolling */
 }
+
 .table:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 .table h3 {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
   margin: 0;
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.25rem);
 }
 
 .tableStructure {
   width: 100%;
+  min-width: 640px; /* triggers horizontal scroll when viewport < 640px */
   border-collapse: collapse;
 }
 
 .tableStructure th,
 .tableStructure td {
-  padding: 0.75rem;
+  padding: 0.85rem clamp(0.75rem, 1.2vw, 1rem);
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap; /* keeps cells tidy; remove if you prefer wrapping */
 }
 
 .tableStructure th {
-  background: #f9f9f9;
-  background: rgba(255, 255, 255, 0.4);
-  color: white;
+  position: sticky; /* sticky header when scrolling inside card */
+  top: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
   font-weight: 600;
+  backdrop-filter: blur(6px);
 }
 
 .tableStructure tr:last-child td {
   border-bottom: none;
 }
+
 .tableStructure tr {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .generateButton {
-  width: 80%;
-  padding: 1rem 1.5rem;
+  width: min(100%, 820px);
+  padding: clamp(0.85rem, 1vw + 0.5rem, 1.1rem) clamp(1rem, 2vw, 1.5rem);
   border: none;
-  border-radius: 5px;
-  font-size: 1.5rem;
+  border-radius: 10px;
+  font-size: clamp(1.05rem, 0.9vw + 1rem, 1.35rem);
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.15s ease;
   background: linear-gradient(to right, #4361ee, #3a0ca3);
-  color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  margin: 0 auto 1.25rem;
 }
 
 .generateButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.3);
+}
+
+.generateButton:active {
+  transform: translateY(0);
+}
+
+/* =========================
+   Responsive tweaks
+   ========================= */
+
+/* Large tablets / small laptops */
+@media (max-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Tablets & big phones */
+@media (max-width: 768px) {
+  .container {
+    max-width: 720px;
+    gap: 0.25rem;
+  }
+
+  .table h3 {
+    padding: 0.85rem 1rem;
+  }
+
+  .generateButton {
+    width: 100%;
+  }
+}
+
+/* Phones */
+@media (max-width: 560px) {
+  .container {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .table {
+    border-radius: 10px;
+  }
+
+  .tableStructure th,
+  .tableStructure td {
+    padding: 0.75rem 0.85rem;
+  }
+
+  /* allow wrapping for long content if you prefer on very small screens */
+  .tableStructure td {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* Tiny phones */
+@media (max-width: 380px) {
+  .container {
+    padding: 0.875rem;
+  }
+}
+
+/* Accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .table,
+  .generateButton {
+    transition: none;
+  }
 }

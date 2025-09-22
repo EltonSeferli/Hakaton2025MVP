@@ -22,7 +22,7 @@ export default function LoginPage({ language, setLanguage }) {
       <div className={styles.card}>
         <div className={styles.forms}>
           {/* LOGIN */}
-          <div className={styles.formCol}>
+          <div className={`${styles.formCol} ${styles.loginForm}`}>
             <h2 className={styles.heading}>{t.loginTitle}</h2>
             <input
               className={styles.input}

@@ -187,3 +187,65 @@
 .img_div img {
   width: 100%;
 }
+
+/* Keep two columns and the sliding panel down to tablets */
+@media (max-width: 900px) {
+  .card {
+    width: min(940px, 96vw); /* fluid, but still wide enough for 2 cols */
+    height: 480px; /* keep the original card height */
+  }
+
+  .forms {
+    position: absolute; /* preserve original layout */
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* <-- stay side-by-side */
+    gap: 16px;
+  }
+
+  .formCol {
+    padding: 32px; /* slightly tighter paddings */
+  }
+
+  .panel {
+    display: flex; /* keep the sliding panel visible */
+  }
+}
+
+/* Only on small phones: stack the forms and hide the panel */
+@media (max-width: 600px) {
+  .card {
+    height: auto; /* let it grow vertically */
+    min-height: 520px;
+    width: 96vw;
+  }
+  .loginForm {
+    display: none;
+  }
+
+  .forms {
+    position: static; /* allow the card to expand naturally */
+    inset: auto;
+    display: grid;
+    grid-template-columns: 1fr; /* stack login & sign-up */
+    gap: 16px;
+  }
+
+  .formCol {
+    padding: 20px;
+  }
+  .panel {
+    display: none;
+  } /* simpler UX on very small screens */
+
+  /* make the side-by-side input groups wrap nicely without JSX changes */
+  .formCol > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .formCol > div .input {
+    flex: 1 1 180px;
+    min-width: 0;
+  }
+}

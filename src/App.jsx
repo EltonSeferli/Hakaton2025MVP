@@ -6,7 +6,6 @@ import TableStructure from "./pages/tableStructure/TableStructure";
 import Preview from "./pages/preview/Preview";
 import { useState } from "react";
 import ResultPage from "./pages/result/ResultPage";
-import LangToggle from "./components/langToggle/LangToggle";
 export default function App() {
   const [tables, setTables] = useState([]);
   const [language, setLanguage] = useState("en");

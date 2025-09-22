@@ -5,7 +5,7 @@ import BackButton from "../../components/buttons/backButton/BackButton";
 import Footer from "../../components/footer/Footer";
 import lang from "./lang";
 import LangToggle from "../../components/langToggle/LangToggle";
-
+import { uuid4 } from "uuid4";
 const Preview = ({ tables, language = "en", setLanguage }) => {
   const navigate = useNavigate();
   const t = lang[language]; // seçilmiş dil
@@ -27,7 +27,7 @@ const Preview = ({ tables, language = "en", setLanguage }) => {
 
         <div className={styles.tablesContainer}>
           {tables?.map((table) => (
-            <div key={table.id} className={styles.table}>
+            <div key={uuid4()} className={styles.table}>
               <h3>{table.tableName}</h3>
               <table className={styles.tableStructure}>
                 <thead>
