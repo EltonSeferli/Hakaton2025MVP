@@ -22,6 +22,7 @@ export default function LoginPage({ language, setLanguage }) {
       <div className={styles.card}>
         <div className={styles.forms}>
           {/* LOGIN */}
+
           <div className={`${styles.formCol} ${styles.loginForm}`}>
             <h2 className={styles.heading}>{t.loginTitle}</h2>
             <input
@@ -53,62 +54,64 @@ export default function LoginPage({ language, setLanguage }) {
           </div>
 
           {/* SIGN UP */}
-          <div className={styles.formCol}>
-            <h2 className={styles.heading}>{t.signUpTitle}</h2>
-            <div style={{ display: "flex", gap: "10px" }}>
+          {isSignUp ? (
+            <div className={styles.formCol}>
+              <h2 className={styles.heading}>{t.signUpTitle}</h2>
+              <div style={{ display: "flex", gap: "10px" }}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder={t.name}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder={t.surname}
+                />
+              </div>
+
+              <input
+                className={styles.input}
+                type="email"
+                placeholder={t.email}
+              />
+              <div style={{ display: "flex", gap: "10px" }}>
+                <input
+                  className={styles.input}
+                  type="password"
+                  placeholder={t.password}
+                />
+                <input
+                  className={styles.input}
+                  type="password"
+                  placeholder={t.confirmPassword}
+                />
+              </div>
+
               <input
                 className={styles.input}
                 type="text"
-                placeholder={t.name}
+                placeholder={t.company}
               />
-              <input
-                className={styles.input}
-                type="text"
-                placeholder={t.surname}
-              />
-            </div>
 
-            <input
-              className={styles.input}
-              type="email"
-              placeholder={t.email}
-            />
-            <div style={{ display: "flex", gap: "10px" }}>
-              <input
-                className={styles.input}
-                type="password"
-                placeholder={t.password}
-              />
-              <input
-                className={styles.input}
-                type="password"
-                placeholder={t.confirmPassword}
-              />
-            </div>
-
-            <input
-              className={styles.input}
-              type="text"
-              placeholder={t.company}
-            />
-
-            <button
-              className={styles.primary}
-              onClick={() => navigate("/selection")}
-            >
-              {t.signUpBtn}
-            </button>
-            <p className={styles.small}>
-              {t.alreadyHaveAccount}{" "}
               <button
-                className={styles.link}
-                type="button"
-                onClick={() => setIsSignUp(false)}
+                className={styles.primary}
+                onClick={() => navigate("/selection")}
               >
-                {t.loginTitle}
+                {t.signUpBtn}
               </button>
-            </p>
-          </div>
+              <p className={styles.small}>
+                {t.alreadyHaveAccount}{" "}
+                <button
+                  className={styles.link}
+                  type="button"
+                  onClick={() => setIsSignUp(false)}
+                >
+                  {t.loginTitle}
+                </button>
+              </p>
+            </div>
+          ) : null}
         </div>
 
         {/* PANEL */}
