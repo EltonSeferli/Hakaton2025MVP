@@ -22,37 +22,35 @@ export default function LoginPage({ language, setLanguage }) {
       <div className={styles.card}>
         <div className={styles.forms}>
           {/* LOGIN */}
-          {isSignUp ? null : (
-            <div className={styles.formCol}>
-              <h2 className={styles.heading}>{t.loginTitle}</h2>
-              <input
-                className={styles.input}
-                type="email"
-                placeholder={t.email}
-              />
-              <input
-                className={styles.input}
-                type="password"
-                placeholder={t.password}
-              />
+          <div className={styles.formCol}>
+            <h2 className={styles.heading}>{t.loginTitle}</h2>
+            <input
+              className={styles.input}
+              type="email"
+              placeholder={t.email}
+            />
+            <input
+              className={styles.input}
+              type="password"
+              placeholder={t.password}
+            />
+            <button
+              className={styles.primary}
+              onClick={() => navigate("/selection")}
+            >
+              {t.loginBtn}
+            </button>
+            <p className={styles.small}>
+              {t.dontHaveAccount}{" "}
               <button
-                className={styles.primary}
-                onClick={() => navigate("/selection")}
+                className={styles.link}
+                type="button"
+                onClick={() => setIsSignUp(true)}
               >
-                {t.loginBtn}
+                {t.signUp}
               </button>
-              <p className={styles.small}>
-                {t.dontHaveAccount}{" "}
-                <button
-                  className={styles.link}
-                  type="button"
-                  onClick={() => setIsSignUp(true)}
-                >
-                  {t.signUp}
-                </button>
-              </p>
-            </div>
-          )}
+            </p>
+          </div>
 
           {/* SIGN UP */}
           {isSignUp ? (
@@ -115,7 +113,13 @@ export default function LoginPage({ language, setLanguage }) {
           ) : null}
         </div>
 
-        <div className={styles.panel} aria-hidden="true">
+        {/* PANEL */}
+        <div
+          className={`${styles.panel} ${
+            isSignUp ? styles.panelLeft : styles.panelRight
+          }`}
+          aria-hidden="true"
+        >
           <div className={styles.panelInner}>
             <span className={styles.panelBody}>{t.panelText}</span>
           </div>
