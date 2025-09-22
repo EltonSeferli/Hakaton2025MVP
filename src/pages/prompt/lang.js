@@ -5,7 +5,7 @@ const lang = {
     promptPlaceholder:
       "A discovery app for food lovers to find nearby restaurants and read reviews.",
     assetsApp: "Assets App",
-    assestsAppPrompt:
+    assetsAppPrompt:
       "I want to create a table structure to manage company assets. Each asset should have a name, category, purchase date, value, and current status. I also want to keep track of maintenance history for every asset.",
     stockApp: "Stock App",
     stockAppPrompt:

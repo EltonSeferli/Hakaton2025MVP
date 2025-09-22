@@ -8,12 +8,8 @@ function LangToggle({ setLanguage }) {
   return (
     <div style={{ position: "absolute", top: 10, right: 10 }}>
       <select onChange={handleChange} className={styles.select}>
-        <option value="en">
-          <span>EN</span>
-        </option>
-        <option value="az">
-          <span>AZE</span>
-        </option>
+        <option value="en">EN</option>
+        <option value="az">AZE</option>
       </select>
     </div>
   );

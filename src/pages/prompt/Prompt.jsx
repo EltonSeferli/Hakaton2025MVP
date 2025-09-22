@@ -13,7 +13,7 @@ export default function Prompt({ tables, setTables, language, setLanguage }) {
   const tables1 = [
     {
       id: Date.now(),
-      tableName: "Table 1",
+      tableName: "",
       rows: [
         {
           id: Date.now() + 1,
@@ -87,7 +87,7 @@ export default function Prompt({ tables, setTables, language, setLanguage }) {
             placeholder={t.promptPlaceholder}
           />
           <Link to={"/preview"}>
-            <button className={styles.sendButton} disabled={text.length === 0}>
+            <button className={styles.sendButton} disabled={text?.length === 0}>
               <ArrowUpwardIcon />
             </button>
           </Link>
